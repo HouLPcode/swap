@@ -1,0 +1,27 @@
+syntax = "proto3";
+package swap;
+
+option go_package = "github.com/HouLPcode/swap";
+
+// 切换请求
+message SwapRequest {
+  string appid = 1;
+  string subappid = 2;
+  string source_city = 3;
+  string dst_city = 4;
+  int64 force_start_num = 5;  // 人工指定切换后的号段起始号码
+  string operater = 6;
+}
+
+// 切换响应
+message SwapResponse {
+  string appid = 1;
+  string subappid = 2;
+  string alloc_node = 3;  // ipport，方便直接定位具体容器观察放号情况
+}
+
+// 切换服务
+service SwapService {
+  // 执行切换操作
+  rpc Swap(SwapRequest) returns (SwapResponse) {}
+} 
